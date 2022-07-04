@@ -2,6 +2,19 @@
 
 <%= render @person %>
 
+<p>This person is similar to:<p>
+<ul>
+<% @pokemon.each do |pokemon| %>
+  <li><em><%= link_to pokemon.name, pokemon %></em>
+    <ul>
+      <% @posts.all.where(pokemon: pokemon).each do |post| %>
+        <li><%= link_to post.content, post %></li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>
+</ul>
+
 <div>
   <%= link_to "Edit this person", edit_person_path(@person) %> |
   <%= link_to "Back to people", people_path %>
