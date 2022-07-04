@@ -13,12 +13,14 @@
 
   <div>
     <%= form.label :person_id, style: "display: block" %>
-    <%= form.text_field :person_id %>
+    <%# form.text_field :person_id %>
+    <%= form.collection_select :person_id, Person.all, :id, :name %>
   </div>
 
   <div>
     <%= form.label :pokemon_id, style: "display: block" %>
-    <%= form.text_field :pokemon_id %>
+    <%# form.text_field :pokemon_id %>
+    <%= form.collection_select :pokemon_id, Pokemon.all, :id, :name %>
   </div>
 
   <div>
