@@ -25,7 +25,6 @@ class PokemonsController < ApplicationController
 
     respond_to do |format|
       if @pokemon.save
-        @pokemon.define_values
         format.html { redirect_to pokemon_url(@pokemon), notice: "Pokemon was successfully created." }
         format.json { render :show, status: :created, location: @pokemon }
       else

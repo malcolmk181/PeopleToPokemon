@@ -21,6 +21,7 @@
     <%= form.label :pokemon_id, style: "display: block" %>
     <%# form.text_field :pokemon_id %>
     <%= form.collection_select :pokemon_id, Pokemon.all, :id, :name %>
+    <%= form.text_field_with_auto_complete :pokemon_id, Pokemon.all, :id, :name %>
   </div>
 
   <div>
