@@ -2,14 +2,16 @@
 
 <%= render @post %>
 
-<p style="color: <%= @post.likes >=0 ? "green" : "red" %>;">Likes: <%= @post.likes %></p>
+<p style="color: <%= @post.likes >=0 ? "green" : "red" %>;"><strong>Score:</strong> <%= "#{@post.likes >= 0 ? "+" : "-"}#{@post.likes}" %></p>
 
-<h3>Comments:</h3>
-<ul>
-<% @comments.each do |c| %>
-  <li style="color: <%= c.vote ? "green" : "red" %>;"><%= c.content %></li>
+<% if @comments.count > 0 %>
+  <h3>Comments:</h3>
+  <ul>
+    <% @comments.each do |c| %>
+      <li style="color: <%= c.vote ? "green" : "red" %>;"><%= c.content %></li>
+    <% end %>
+  </ul>
 <% end %>
-</ul>
 
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |

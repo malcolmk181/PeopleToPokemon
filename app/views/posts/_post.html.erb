@@ -1,12 +1,12 @@
 <div id="<%= dom_id post %>">
   <p>
     <strong>Person:</strong>
-    <%= post.person_id %>
+    <%= link_to post.person.name, post.person %>
   </p>
 
   <p>
     <strong>Pokemon:</strong>
-    <%= post.pokemon_id %>
+    <%= link_to post.pokemon.name, post.pokemon %>
   </p>
 
   <p>
