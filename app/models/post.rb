@@ -2,6 +2,8 @@ class Post < ApplicationRecord
   belongs_to :person
   belongs_to :pokemon
   has_many :comments
+  validates :content, length: {minimum: 20}
+
 
   def likes
     total = 0
