@@ -2,9 +2,33 @@
 
 <%= render @pokemon %>
 
+<% if @pokemon.variety %>
+  <p><strong>Variety:</strong> <%= @pokemon.variety %></p>
+<% end %>
+
+<% if @pokemon.region %>
+  <p><strong>Location:</strong> <%= @pokemon.region %></p>
+<% end %>
+
+
+<% if @people.count > 0 %>
+  <p>This pokemon is similar to:<p>
+  <ul>
+  <% @people.uniq.each do |person| %>
+    <li><em><%= link_to person.name, person %></em>
+      <ul>
+        <% @posts.all.where(person: person).each do |post| %>
+          <li><%= link_to post.content, post %> <span style="color: <%= post.score_color %>;">(<%= post.score_text %>)</span></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
 <div>
   <%= link_to "Edit this pokemon", edit_pokemon_path(@pokemon) %> |
-  <%= link_to "Back to pokemons", pokemons_path %>
+  <%= link_to "Back to pokemon", pokemons_path %>
 
   <%= button_to "Destroy this pokemon", @pokemon, method: :delete %>
 </div>
