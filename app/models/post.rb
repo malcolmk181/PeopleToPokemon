@@ -11,6 +11,16 @@ class Post < ApplicationRecord
     total
   end
 
+  # takes Post#likes and returns a string with a + if >= 0
+  def score_text
+    likes >= 0 ? "+#{likes}" : "#{likes}"
+  end
+
+  # takes Post#likes and returns a string of green or red if >= 0
+  def score_color
+    likes >= 0 ? "green" : "red"
+  end
+
   def pokemon_name
     if pokemon
       pokemon.name

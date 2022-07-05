@@ -2,7 +2,7 @@
 
 <%= render @post %>
 
-<p style="color: <%= @post.likes >=0 ? "green" : "red" %>;"><strong>Score:</strong> <%= "#{@post.likes >= 0 ? "+" : "-"}#{@post.likes}" %></p>
+<p style="color: <%= @post.score_color %>;"><strong>Score:</strong> <%= @post.score_text %></p>
 
 <% if @comments.count > 0 %>
   <h3>Comments:</h3>
