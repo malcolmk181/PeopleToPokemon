@@ -16,7 +16,8 @@ bin/rails db:seed
 
 ## About the app
 * Built on Ruby 2.7 and Rails 7.0
-* Utilizes a SQLite3 database for data persistence
+* Manages a SQLite3 database for data persistence
+* Uses the [Bulma.io](https://bulma.io/) CSS framework for the front-end
 * Pulls Pokémon info from the [PokéAPI](https://pokeapi.co/docs/v2) database, using the [Poke-Api-V2](https://github.com/rdavid1099/poke-api-v2) gem
 ---
 <div align="center">By: <a href="https://github.com/lukebaltaycs">Luke Baltay</a> and <a href="https://github.com/malcolmk181">Malcolm Keyes</a></div>
