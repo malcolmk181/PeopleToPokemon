@@ -22,14 +22,14 @@
         </a>
 
         <!-- don't get rid of this -->
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-menu" id="navMenu">
         <!-- These are the links at the top left, after the logo -->
         <div class="navbar-start">
           <a class="navbar-item" href="/people">
@@ -46,8 +46,9 @@
         </div>
 
         <!-- We'll need this after we get sign up / log in implemented -->
-        <%# <div class="navbar-end">
-          <div class="navbar-item">
+        <div class="navbar-end">
+
+          <!-- <div class="navbar-item">
             <div class="buttons">
               <a class="button is-primary">
                 <strong>Sign up</strong>
@@ -56,15 +57,32 @@
                 Log in
               </a>
             </div>
-          </div>
-        </div> %>
+          </div> -->
+
+        </div>
       </div>
     </nav>
 
     <!-- Adds some padding around everything -->
     <section class="section">
-      <!-- this is where all the page content is added -->
-      <%= yield %>
+      <!-- sets a max width so nothing is unnecessarily large - particularly noticeable on giant screens -->
+      <div class="container">
+        <!-- this is where all the page content is added -->
+        <%= yield %>
+      </div>
     </section>
+
+    <!-- script necessary for full bulma navbar functionality -->
+    <script async type="text/javascript">
+      // source: https://gist.github.com/Bradcomp/a9ef2ef322a8e8017443b626208999c1
+      (function () {
+          var burger = document.querySelector('.navbar-burger');
+          var menu = document.querySelector('#' + burger.dataset.target);
+          burger.addEventListener('click', function () {
+              burger.classList.toggle('is-active');
+              menu.classList.toggle('is-active');
+          });
+      })();
+    </script>
   </body>
 </html>

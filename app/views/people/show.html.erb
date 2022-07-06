@@ -3,18 +3,26 @@
 <%= render @person %>
 
 <% if @pokemon.count > 0 %>
-  <p>This person is similar to:<p>
-  <ul>
-  <% @pokemon.uniq.each do |pokemon| %>
-    <li><em><%= link_to pokemon.name, pokemon %></em>
-      <ul>
-        <% @posts.all.where(pokemon: pokemon).each do |post| %>
-          <li><%= link_to post.content, post %> <span style="color: <%= post.score_color %>;">(<%= post.score_text %>)</span></li>
-        <% end %>
-      </ul>
-    </li>
-  <% end %>
-  </ul>
+  <p class="mb-3">is similar to...<p>
+  <!-- container for pokemon boxes -->
+  <div class="is-flex is-flex-direction-row is-flex-wrap-wrap mb-3">
+    <% @pokemon.uniq.each do |pokemon| %>
+      <!-- box for individual pokemon -->
+      <div class="box content mx-3">
+        <!-- div for name & picture -->
+        <div class="is-flex is-flex-direction-row is-justify-content-center is-align-items-center">
+          <img class="image is-64x64" src="<%= pokemon.img_url %>" alt="<%= pokemon.name %> image" />
+          <em><%= link_to pokemon.name, pokemon %></em>
+        </div>
+        <!-- list of posts -->
+        <ul>
+          <% @posts.all.where(pokemon: pokemon).each do |post| %>
+            <li><%= link_to post.content, post %> <span style="color: <%= post.score_color %>;">(<%= post.score_text %>)</span></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <div>
