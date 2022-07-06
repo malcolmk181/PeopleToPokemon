@@ -2,15 +2,69 @@
 <html>
   <head>
     <title>PeopleToPokemon</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   </head>
 
   <body>
-    <%= yield %>
+    <!-- Bulma Navbar! https://bulma.io/documentation/components/navbar/ -->
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <!-- the logo -->
+        <a class="navbar-item" href="/posts">
+          <p><strong>PeopleToPokémon</strong></p>
+        </a>
+
+        <!-- don't get rid of this -->
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <!-- These are the links at the top left, after the logo -->
+        <div class="navbar-start">
+          <a class="navbar-item" href="/people">
+            People
+          </a>
+
+          <a class="navbar-item" href="/pokemons">
+            Pokémon
+          </a>
+
+          <a class="navbar-item" href="/posts">
+            Posts
+          </a>
+        </div>
+
+        <!-- We'll need this after we get sign up / log in implemented -->
+        <%# <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light">
+                Log in
+              </a>
+            </div>
+          </div>
+        </div> %>
+      </div>
+    </nav>
+
+    <!-- Adds some padding around everything -->
+    <section class="section">
+      <!-- this is where all the page content is added -->
+      <%= yield %>
+    </section>
   </body>
 </html>
