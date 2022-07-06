@@ -1,4 +1,6 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
 
 <%= render @pokemon %>
 
@@ -12,18 +14,18 @@
 
 
 <% if @people.count > 0 %>
-  <p>This pokemon is similar to:<p>
-  <ul>
+  <br>
+  <p><strong><%= @pokemon.name %> has been likened to...</strong><p>
   <% @people.uniq.each do |person| %>
-    <li><em><%= link_to person.name, person %></em>
-      <ul>
+    <div class="box content is-flex is-flex-direction-row mb-2">
+      <p class="mb-0"><strong><%= link_to person.name, person %></strong></p>
+      <ul class="mt-0">
         <% @posts.all.where(person: person).each do |post| %>
           <li><%= link_to post.content, post %> <span style="color: <%= post.score_color %>;">(<%= post.score_text %>)</span></li>
         <% end %>
       </ul>
-    </li>
+    </div>
   <% end %>
-  </ul>
 <% end %>
 
 <div>

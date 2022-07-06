@@ -1,13 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
 
-<h1>People</h1>
+<h1 class="title">People</h1>
 
 <div id="people">
   <% @people.each do |person| %>
-    <%= render person %>
-    <p>
-      <%= link_to "Show this person", person %>
-    </p>
+    <a href="<%= person_path(person) %>">
+      <div class="box content mb-3">
+        <h3 class="mb-0"><%= person.name %></h3>
+        <!-- here is where we'll put tags/categories -->
+      </div>
+    </a>
   <% end %>
 </div>
 

@@ -1,13 +1,18 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
 
-<h1>Posts</h1>
+<h1 class="title">Posts</h1>
 
 <div id="posts">
   <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
+    <a href="<%= post_path(post) %>">
+      <div class="box content is-flex is-flex-direction-row is-align-items-center mb-3 p-1">
+        <img class="image is-64x64" src="<%= post.pokemon.img_url %>" alt="<%= post.pokemon.name %> image" />
+        <p class="mb-0" ><strong><%= post.pokemon.name %> & <%= post.person.name %></strong></p>
+        <p class="ml-1 mb-0" style="color: <%= post.score_color %>;"><strong>  <%= post.score_text %><strong></p>
+      </div>
+    </a>
   <% end %>
 </div>
 

@@ -1,14 +1,11 @@
 <div id="<%= dom_id pokemon %>">
-  <p>
-    <strong>Name:</strong>
-    <%= pokemon.name %>
-  </p>
-
-  <img src=<%= pokemon.img_url %> >
-
-  <p>
-    <strong>Description:</strong>
-    <%= pokemon.description %>
-  </p>
+  <div class="is-flex is-align-items-center">
+    <img src="<%= pokemon.img_url %>" alt="<%= pokemon.name %> image" />
+    <p class="title">
+      <%= pokemon.name %>
+    </p>
+  </div>
+  
+  <p> <%= pokemon.description %> </p>
 
 </div>

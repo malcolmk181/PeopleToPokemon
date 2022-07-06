@@ -1,17 +1,38 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @post %>
-
-<p style="color: <%= @post.score_color %>;"><strong>Score:</strong> <%= @post.score_text %></p>
-
-<% if @comments.count > 0 %>
-  <h3>Comments:</h3>
-  <ul>
-    <% @comments.each do |c| %>
-      <li style="color: <%= c.vote ? "green" : "red" %>;"><%= c.content %></li>
-    <% end %>
-  </ul>
+<% if notice %>
+  <p style="color: green"><%= notice %></p>
 <% end %>
+
+<div class="is-flex content is-flex-direction-row is-align-items-center">
+  <img src="<%= @post.pokemon.img_url %>" alt="<%= @post.pokemon.name %> image" />
+  <h3><%= link_to @post.pokemon.name, @post.pokemon %> & <%= link_to @post.person.name, @post.person %></h3>
+</div>
+
+<div class="content">
+  <p>
+    <em><strong>Why?</strong></em><br>
+    <%= @post.content %>
+  </p>
+</div>
+
+<div class="columns">
+  <div class="column is-narrow content">
+    <p><strong>Score</strong></p>
+    <p class="is-size-1" style="color: <%= @post.score_color %>;"><%= @post.score_text %></p>
+  </div>
+
+  <div class="column content">
+    <% if @comments.count > 0 %>
+      <p><strong>Comments</strong></p>
+      <ul>
+        <% @comments.each do |c| %>
+          <li style="color: <%= c.vote ? "green" : "red" %>;"><%= c.content %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
+
+
 
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |
