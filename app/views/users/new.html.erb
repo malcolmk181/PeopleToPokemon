@@ -1,3 +1,15 @@
+<% if @user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this account from being created:</h2>
+
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
 <%= form_for @user, url: '/signup' do |f| %>
     Name: <%= f.text_field :name %>
     Password: <%= f.password_field :password %>

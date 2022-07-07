@@ -2,12 +2,12 @@
     <div style="color: red">
       <h2><%= flash[:error] %></h2>
     </div>
-  <% end %> </br>
+<% end %> </br>
 
 <h1> Login Page </h1>
 
 <%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
-    <input name=name>
-    <input name=password>
-    <input type=submit value='login'>
+    <p>Name: <input name=name> </br>
+    <p>Password: <input name=password> </br>
+    <input type=submit value='Login'>
   <% end %>
