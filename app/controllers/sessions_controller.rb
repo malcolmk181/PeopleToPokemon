@@ -7,15 +7,18 @@ class SessionsController < ApplicationController
     def create
         # must be an existing account, password must be correct
         @user = User.find_by(name: params[:name])
-        flash[:error] = "Account username or password is incorrect" unless @user && @user.authenticate(params[:password])
-        return head(:forbidden) unless @user && @user.authenticate(params[:password])
-        session[:user_id] = @user.id
-        redirect_to '/'
+        if @user && @user.authenticate(params[:password])
+            session[:user_id] = @user.id
+            redirect_to posts_path
+        else
+            flash[:error] = "Account username or password is incorrect"
+            redirect_to login_path
+        end
     end
 
     def destroy
         session.delete :user_id
-        redirect_to signup_path
+        redirect_to login_path
     end
 
 end

@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # GET /people or /people.json
   def index
@@ -74,6 +75,11 @@ class PeopleController < ApplicationController
 
     def authorize_page
       redirect_to login_path unless session[:user_id]
+    end
+
+    def record_not_found
+      # handle redirect
+      redirect_to people_path
     end
 
 end

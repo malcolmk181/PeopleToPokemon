@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found  
 
   # GET /comments or /comments.json
   def index
@@ -77,5 +78,8 @@ class CommentsController < ApplicationController
       redirect_to login_path unless session[:user_id]
     end
 
+    def record_not_found
+      redirect_to posts_path
+    end
     
 end
