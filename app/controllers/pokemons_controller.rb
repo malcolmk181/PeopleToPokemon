@@ -1,5 +1,6 @@
 class PokemonsController < ApplicationController
   before_action :set_pokemon, only: %i[ show edit update destroy ]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found  
 
   # GET /pokemons or /pokemons.json
   def index
@@ -74,5 +75,10 @@ class PokemonsController < ApplicationController
     def authorize_page
       redirect_to login_path unless session[:user_id]
     end
+    
+    def record_not_found
+      redirect_to pokemons_path
+    end
+
 
 end

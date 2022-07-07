@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # GET /posts or /posts.json
   def index
@@ -82,6 +83,10 @@ class PostsController < ApplicationController
         flash[:error] = "Must be signed in to correct account to edit post."
         redirect_to post_path(@post)
       end
+    end
+
+    def record_not_found
+      redirect_to posts_path
     end
 
 end

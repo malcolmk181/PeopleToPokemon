@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
     def new
         @user = User.new
@@ -25,6 +26,11 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:name, :password, :password_confirmation)
+    end
+
+    def record_not_found
+        session[:user_id] = nil
+        redirect_to login_path
     end
 
 end
