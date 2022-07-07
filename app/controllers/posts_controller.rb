@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :authorize_page
 
   # GET /posts or /posts.json
   def index
@@ -19,11 +18,14 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @post = Post.find(params[:id])
+    self.authorize_edit
   end
 
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user = User.find_by(id: session[:user_id])
 
     respond_to do |format|
       if @post.save
@@ -72,6 +74,14 @@ class PostsController < ApplicationController
 
     def authorize_page
       redirect_to login_path unless session[:user_id]
+    end
+
+    def authorize_edit
+      redirect_to login_path unless session[:user_id]
+      if @post.user.id != session[:user_id]
+        flash[:notice] = "Must be signed in to correct account to edit post."
+        redirect_to post_path(@post)
+      end
     end
 
 end

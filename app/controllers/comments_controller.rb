@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
-  before_action :authorize_page
 
   # GET /comments or /comments.json
   def index
@@ -13,6 +12,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
+    authorize_page
     @post = Post.find(params[:id])
     puts @post.id
     @comment = Comment.new
@@ -76,4 +76,6 @@ class CommentsController < ApplicationController
     def authorize_page
       redirect_to login_path unless session[:user_id]
     end
+
+    
 end
