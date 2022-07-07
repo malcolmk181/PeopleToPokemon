@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :person
   belongs_to :pokemon
+  belongs_to :user
   has_many :comments
   validates :content, length: {minimum: 20}
 

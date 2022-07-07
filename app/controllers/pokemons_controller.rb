@@ -1,6 +1,5 @@
 class PokemonsController < ApplicationController
   before_action :set_pokemon, only: %i[ show edit update destroy ]
-  before_action :authorize_page
 
   # GET /pokemons or /pokemons.json
   def index
