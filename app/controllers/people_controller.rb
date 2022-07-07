@@ -24,6 +24,8 @@ class PeopleController < ApplicationController
   # POST /people or /people.json
   def create
     @person = Person.new(person_params)
+    Pixabay.configure {|config| config.key = "28500566-e5988cf43e390d3c5949dac21"}
+    @person.img_url= Pixabay.new.photos(q: @person.name, safesearch: true, page: 1, per_page: 20)["hits"].first["webformatURL"]
 
     respond_to do |format|
       if @person.save
