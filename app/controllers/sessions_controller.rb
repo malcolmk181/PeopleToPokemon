@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
     def create
         # must be an existing account, password must be correct
         @user = User.find_by(name: params[:name])
-        return head(:forbidden) unless @user.authenticate(params[:password])
+        flash[:error] = "Account username or password is incorrect" unless @user && @user.authenticate(params[:password])
+        return head(:forbidden) unless @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
         redirect_to '/'
     end

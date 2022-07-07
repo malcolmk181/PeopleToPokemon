@@ -12,7 +12,7 @@ x = 1
 100.times do
     poke = PokeApi.get(pokemon: x)
     new_poke = Pokemon.new(name: poke.name, img_url: poke.sprites.front_default, variety: poke.types.first.type.name)
-    new_poke.description = PokeApi.get(pokemon_species: poke.name).flavor_text_entries.find{|entry| entry.language.name=="en"}.flavor_text    
+    new_poke.description = PokeApi.get(pokemon_species: poke.name).flavor_text_entries.find{|entry| entry.language.name=="en"}.flavor_text.gsub('\n', ' ')    
     new_poke.save
     x+=1
 end
