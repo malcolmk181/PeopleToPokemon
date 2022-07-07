@@ -25,7 +25,7 @@
       <p><strong>Comments</strong></p>
       <ul>
         <% @comments.each do |c| %>
-          <li style="color: <%= c.vote ? "green" : "red" %>;"><%= c.content %></li>
+          <li style="color: <%= c.vote ? "green" : "red" %>;"><%= c.content %> (@<%= c.user.name %>)</li>
         <% end %>
       </ul>
     <% end %>
