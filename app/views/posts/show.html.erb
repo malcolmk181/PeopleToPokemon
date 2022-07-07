@@ -2,6 +2,10 @@
   <p style="color: green"><%= notice %></p>
 <% end %>
 
+<% if flash[:error] %>
+  <p style="color: red"><%= flash[:error] %></p>
+<% end %>
+
 <div class="is-flex content is-flex-direction-row is-align-items-center">
   <img src="<%= @post.pokemon.img_url %>" alt="<%= @post.pokemon.name %> image" />
   <h3><%= link_to @post.pokemon.name, @post.pokemon %> & <%= link_to @post.person.name, @post.person %> (@<%= @post.user.name%>)</h3>
@@ -35,7 +39,9 @@
 
 
 <div>
+ <% if @post.user.id == session[:user_id]%>
   <%= link_to "Edit this post", edit_post_path(@post) %> |
+<% end %>
   <%= link_to "Back to posts", posts_path %>
 
   <%= button_to "Add a comment", "/posts/#{@post.id}/comments/new", method: :get %>

@@ -2,10 +2,17 @@ class Pokemon < ApplicationRecord
     has_many :posts
     has_many :persons, through: :posts
 
-    def self.define_values(pokemon)
-        poke = PokeApi.get(pokemon: pokemon.name.downcase)   
-        pokemon.img_url = poke.sprites.front_default
-        pokemon.description = PokeApi.get(pokemon_species: poke.name).flavor_text_entries.find{|entry| entry.language.name=="en"}.flavor_text.gsub('\n', ' ').gsub('\f', ' ') 
+    def define_values
+        poke = PokeApi.get(pokemon: self.name.downcase)   
+        self.img_url = poke.sprites.front_default
+        self.variety = poke.types.first.type.name
+        self.region = PokeApi.get(generation: self.generation).main_region.name.capitalize
+        self.description = PokeApi.get(pokemon_species: poke.name).flavor_text_entries.find{|entry| entry.language.name=="en"}.flavor_text.gsub('\n', ' ').gsub('\f', ' ') 
+    end
+
+    def generation
+        poke = PokeApi.get(pokemon: self.name.downcase) 
+        PokeApi.get(pokemon_species: poke.name).generation.name
     end
 
     def self.type_imgs

@@ -26,7 +26,11 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new(person_params)
     Pixabay.configure {|config| config.key = "28500566-e5988cf43e390d3c5949dac21"}
-    @person.img_url= Pixabay.new.photos(q: @person.name, safesearch: true, page: 1, per_page: 20)["hits"].first["webformatURL"]
+    if !(Pixabay.new.photos(q: @person.name, safesearch: true, page: 1, per_page: 20)["hits"].first).nil?
+      @person.img_url= Pixabay.new.photos(q: @person.name, safesearch: true, page: 1, per_page: 20)["hits"].first["webformatURL"]
+    else
+      @person.img_url='icon.svg'
+    end
 
     respond_to do |format|
       if @person.save
@@ -54,6 +58,12 @@ class PeopleController < ApplicationController
 
   # DELETE /people/1 or /people/1.json
   def destroy
+    @person.posts.each do |post|
+      post.comments.each{|comment| comment.destroy }
+      post.destroy
+    end
+    @person.save
+    puts @person.posts
     @person.destroy
 
     respond_to do |format|
