@@ -52,16 +52,23 @@
         <!-- We'll need this after we get sign up / log in implemented -->
         <div class="navbar-end">
 
-          <!-- <div class="navbar-item">
+          <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a class="button is-light">
-                Log in
-              </a>
+              <% if session[:user_id] %>
+                <a class="button is-static">
+                  @<%= User.find(session[:user_id]).name %>
+                </a>
+                <%= button_to "Log out", {controller: "sessions", action: "destroy", method: 'post'}, {class: "button is-outlined is-danger"} %>
+              <% else %>
+                <a class="button is-primary is-outlined" href="<%= signup_path %>">
+                  Sign up
+                </a>
+                <a class="button is-link is-outlined" href="<%= login_path %>">
+                  Log in
+                </a>
+              <% end %>
             </div>
-          </div> -->
+          </div>
 
         </div>
       </div>
