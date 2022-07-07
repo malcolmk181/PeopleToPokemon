@@ -2,6 +2,9 @@
 
 <%= render @comment %>
 
+<p><%= @comment.user.name %></p>
+<p><%= session[:user_id]%></p>
+
 <div>
   <%= link_to "Edit this comment", edit_comment_path(@comment, @post) %> |
   <%= link_to "Back to comments", comments_path %>

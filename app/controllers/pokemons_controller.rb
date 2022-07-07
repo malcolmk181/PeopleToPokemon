@@ -1,5 +1,6 @@
 class PokemonsController < ApplicationController
   before_action :set_pokemon, only: %i[ show edit update destroy ]
+  before_action :authorize_page
 
   # GET /pokemons or /pokemons.json
   def index
@@ -69,4 +70,9 @@ class PokemonsController < ApplicationController
     def pokemon_params
       params.require(:pokemon).permit(:name)
     end
+
+    def authorize_page
+      redirect_to login_path unless session[:user_id]
+    end
+
 end

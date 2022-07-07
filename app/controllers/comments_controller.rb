@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :authorize_page
 
   # GET /comments or /comments.json
   def index
@@ -13,6 +14,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @post = Post.find(params[:id])
+    puts @post.id
     @comment = Comment.new
   end
 
@@ -23,6 +25,7 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
+    @post = Post.find(params[:comment][:post_id])
     @comment = Comment.new(comment_params)
 
     respond_to do |format|
@@ -67,5 +70,9 @@ class CommentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def comment_params
       params.require(:comment).permit(:post_id, :content, :vote)
+    end
+
+    def authorize_page
+      redirect_to login_path unless session[:user_id]
     end
 end

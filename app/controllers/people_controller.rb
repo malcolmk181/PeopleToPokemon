@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
+  before_action :authorize_page
 
   # GET /people or /people.json
   def index
@@ -69,4 +70,9 @@ class PeopleController < ApplicationController
     def person_params
       params.require(:person).permit(:name)
     end
+
+    def authorize_page
+      redirect_to login_path unless session[:user_id]
+    end
+
 end

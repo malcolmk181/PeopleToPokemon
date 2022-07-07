@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :authorize_page
 
   # GET /posts or /posts.json
   def index
@@ -68,4 +69,9 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:person_id, :pokemon_id, :pokemon_name, :content)
     end
+
+    def authorize_page
+      redirect_to login_path unless session[:user_id]
+    end
+
 end

@@ -16,3 +16,5 @@ x = 1
     new_poke.save
     x+=1
 end
+
+Person.create(name: 'Malcolm')
