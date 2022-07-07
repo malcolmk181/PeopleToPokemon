@@ -5,7 +5,8 @@
 <%= render @pokemon %>
 
 <% if @pokemon.variety %>
-  <p><strong>Variety:</strong> <%= @pokemon.variety %></p>
+  <p><strong>Type:</strong> <%= @pokemon.variety %></p>
+  <img src= <%= @pokemon.type_img %> />
 <% end %>
 
 <% if @pokemon.region %>

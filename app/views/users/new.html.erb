@@ -1,3 +1,16 @@
+
+<% if @user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this account from being created:</h2>
+
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
 <div class="columns is-centered is-vcentered">
   <div class="column is-narrow">
     <div class="box" style="min-width: 300px">
