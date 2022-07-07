@@ -5,8 +5,16 @@ class UsersController < ApplicationController
     end
 
     def create
-        User.create(user_params)
-        redirect_to login_path
+        @user = User.new(user_params)
+
+        if @user.save
+            session[:user_id] = @user.id
+            redirect_to posts_path
+        else
+            flash[:error] = "There was an error in your username or password."
+            redirect_to signup_path
+        end
+        
     end
 
     def show

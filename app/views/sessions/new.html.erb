@@ -1,13 +1,53 @@
-<% if flash[:error] %>
-    <div style="color: red">
-      <h2><%= flash[:error] %></h2>
+<div class="columns is-centered is-vcentered">
+  <div class="column is-narrow">
+    <div class="box" style="min-width: 300px">
+
+      <div class="content has-text-centered">
+        <h1>Log in</h1>
+      </div>
+
+      <%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
+        <div class="field">
+          <label class="label">Username</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="username" name="name">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input class="input" type="password" name="password" placeholder="password">
+          </div>
+        </div>
+          
+        <div class="field">
+          <div class="control">
+            <input class="button" type="submit" value="Log in">
+          </div>
+        </div>
+          
+      <% end %>
+
+      <div class="content has-text-centered pt-3">
+        Or <%= link_to "sign up", signup_path %> instead!
+      </div>
+
     </div>
-  <% end %> </br>
 
-<h1> Login Page </h1>
+    <% if flash[:error] %>
+      <div class="notification is-danger" id="error-notif">
+        <button class="delete" onclick="deleteNotification()"></button>
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
-    <input name=name>
-    <input name=password>
-    <input type=submit value='login'>
-  <% end %>
+<!-- Enables closing of error message -->
+<script>
+  function deleteNotification() {
+    var notification = document.getElementById("error-notif");
+    notification.parentNode.removeChild(notification);
+  }
+</script>
