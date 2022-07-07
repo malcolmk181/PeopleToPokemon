@@ -79,7 +79,7 @@ class PostsController < ApplicationController
     def authorize_edit
       redirect_to login_path unless session[:user_id]
       if @post.user.id != session[:user_id]
-        flash[:notice] = "Must be signed in to correct account to edit post."
+        flash[:error] = "Must be signed in to correct account to edit post."
         redirect_to post_path(@post)
       end
     end
