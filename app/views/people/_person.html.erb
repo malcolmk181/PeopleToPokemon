@@ -5,7 +5,12 @@
     </figure>
   </div>
   <div class="content">
-    <h3> <%= person.name %> </h3>
+    <div class="is-flex flex-direction-row has-items-align-center">
+      <h3> <%= person.name %> </h3>
+      <article class="image is-32x32 ml-2">
+        <%= image_tag Pokemon.type_imgs[person.most_common_type.to_sym], {alt: "type: #{person.most_common_type}", title: "type: #{person.most_common_type}"} %>
+      </article>
+    </div>
     <% if person.most_common_type > "" %>
       <p> Most Common Type: <%= person.most_common_type.capitalize %> </p>
     <% end %>
