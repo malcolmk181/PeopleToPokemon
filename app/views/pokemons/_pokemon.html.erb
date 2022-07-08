@@ -1,9 +1,12 @@
 <div id="<%= dom_id pokemon %>">
   <div class="is-flex is-align-items-center">
     <img src="<%= pokemon.img_url %>" alt="<%= pokemon.name %> image" />
-    <p class="title">
+    <p class="title mb-0">
       <%= pokemon.name %>
     </p>
+    <article class="image is-48x48 is-flex is-align-items-center mx-2">
+      <img src= <%= @pokemon.type_img %> alt="<%= pokemon.variety %> image" title="type: <%= pokemon.variety %>" />
+    </article>
   </div>
   
   <p> <%= pokemon.description %> </p>
