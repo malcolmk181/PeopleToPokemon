@@ -5,8 +5,8 @@
         <img src="<%= person.img_url %>" alt="<%= person.name %> image" />
       </figure>
     <% end %>
-    <p class="title">
-      <%= person.name %>
-    </p>
   </div>
-</div>
+  <div class="content">
+    <h3> <%= person.name %> </h3>
+    <p> Most Common Type: <%= person.most_common_type.capitalize %> </p>
+  </div>

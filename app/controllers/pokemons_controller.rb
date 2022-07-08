@@ -25,7 +25,7 @@ class PokemonsController < ApplicationController
   # POST /pokemons or /pokemons.json
   def create
     @pokemon = Pokemon.new(pokemon_params)
-    Pokemon.define_values(@pokemon)
+   @pokemon.define_values
 
     respond_to do |format|
       if @pokemon.save
@@ -53,6 +53,10 @@ class PokemonsController < ApplicationController
 
   # DELETE /pokemons/1 or /pokemons/1.json
   def destroy
+    @pokemon.posts.each do |post|
+      post.comments.each{|comment| comment.destroy }
+      post.destroy
+    end
     @pokemon.destroy
 
     respond_to do |format|
