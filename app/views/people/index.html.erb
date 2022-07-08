@@ -9,7 +9,7 @@
     <a href="<%= person_path(person) %>">
       <div class="box content mb-3 is-flex is-flex-direction-row is-align-items-center">
         <figure class="image is-64x64 my-0 ml-1 is-flex is-align-items-center">
-          <img src="<%= person.img_url %>" alt="<%= person.name %> image" />
+          <%= image_tag person.img_url, alt: "#{person.name} image" %>
         </figure>
         <h3 class="my-0"><%= person.name %></h3>
         <!-- here is where we'll put tags/categories -->
