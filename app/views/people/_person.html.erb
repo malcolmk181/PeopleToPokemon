@@ -1,6 +1,12 @@
 <div id="<%= dom_id person %>">
+  <div class="is-flex is-align-items-center mb-3">
+    <% if person.img_url %>
+      <figure class="image is-96x96 mr-3 is-flex is-align-items-center">
+        <img src="<%= person.img_url %>" alt="<%= person.name %> image" />
+      </figure>
+    <% end %>
+  </div>
   <div class="content">
     <h3> <%= person.name %> </h3>
     <p> Most Common Type: <%= person.most_common_type.capitalize %> </p>
   </div>
-</div>

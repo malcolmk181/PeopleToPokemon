@@ -9,11 +9,15 @@
     <a href="<%= post_path(post) %>">
       <div class="box content is-flex is-flex-direction-row is-align-items-center mb-3 p-1">
         <img class="image is-64x64" src="<%= post.pokemon.img_url %>" alt="<%= post.pokemon.name %> image" />
-        <p class="mb-0" ><strong><%= post.pokemon.name %> & <%= post.person.name %></strong></p>
-        <p class="ml-1 mb-0" style="color: <%= post.score_color %>;"><strong>  <%= post.score_text %><strong></p>
+        <p class="mb-0" ><strong><%= post.pokemon.name %> & </p>
+        <figure class="image is-48x48 my-0 mx-2 is-flex is-align-items-center">
+          <img src="<%= post.person.img_url %>" alt="<%= post.person.name %> image" />
+        </figure>
+        <p class="mb-0"><%= post.person.name %></strong></p>
+        <p class="ml-1 mb-0" style="color: <%= post.score_color %>;"><strong>  <%= post.score_text %></strong></p>
       </div>
     </a>
   <% end %>
 </div>
 
-<%= link_to "New post", new_post_path %>
+<strong><%= link_to "New post", new_post_path %></strong>

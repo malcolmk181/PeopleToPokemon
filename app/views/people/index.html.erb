@@ -7,12 +7,15 @@
 <div id="people">
   <% @people.each do |person| %>
     <a href="<%= person_path(person) %>">
-      <div class="box content mb-3">
-        <h3 class="mb-0"><%= person.name %></h3>
+      <div class="box content mb-3 is-flex is-flex-direction-row is-align-items-center">
+        <figure class="image is-64x64 my-0 ml-1 is-flex is-align-items-center">
+          <img src="<%= person.img_url %>" alt="<%= person.name %> image" />
+        </figure>
+        <h3 class="my-0"><%= person.name %></h3>
         <!-- here is where we'll put tags/categories -->
       </div>
     </a>
   <% end %>
 </div>
 
-<%= link_to "New person", new_person_path %>
+<strong><%= link_to "New person", new_person_path %></strong>
