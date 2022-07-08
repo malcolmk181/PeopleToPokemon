@@ -8,5 +8,7 @@
   </div>
   <div class="content">
     <h3> <%= person.name %> </h3>
-    <p> Most Common Type: <%= person.most_common_type.capitalize %> </p>
+    <% if person.most_common_type > "" %>
+      <p> Most Common Type: <%= person.most_common_type.capitalize %> </p>
+    <% end %>
   </div>
