@@ -5,9 +5,11 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
 Person.delete_all
 Pokemon.delete_all
 Post.delete_all
+
 x = 1
 783.times do
     new_poke = Pokemon.new(name: PokeApi.get(pokemon: x).name)
