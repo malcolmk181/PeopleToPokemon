@@ -4,10 +4,6 @@
 
 <%= render @pokemon %>
 
-<% if @pokemon.variety %>
-  <p><strong>Type:</strong> <%= @pokemon.variety %></p>
-  <img src= <%= @pokemon.type_img %> />
-<% end %>
 
 <% if @pokemon.region %>
   <p><strong>Location:</strong> <%= @pokemon.region %></p>
@@ -30,8 +26,8 @@
 <% end %>
 
 <div>
-  <%= link_to "Edit this pokemon", edit_pokemon_path(@pokemon) %> |
-  <%= link_to "Back to pokemon", pokemons_path %>
+  <%= link_to "Edit this pokémon", edit_pokemon_path(@pokemon) %> |
+  <%= link_to "Back to pokémon", pokemons_path %>
 
-  <%= button_to "Destroy this pokemon", @pokemon, method: :delete %>
+  <%= button_to "Destroy this pokémon", @pokemon, method: :delete %>
 </div>
