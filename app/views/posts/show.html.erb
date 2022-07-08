@@ -9,11 +9,9 @@
 <div class="is-flex content is-flex-direction-row is-align-items-center">
   <img class="image" src="<%= @post.pokemon.img_url %>" alt="<%= @post.pokemon.name %> image" />
   <h3><%= link_to @post.pokemon.name, @post.pokemon %> & </h3>
-  <% if @post.person.img_url %>
-    <figure class="image is-64x64 mx-2 is-flex is-align-items-center">
-      <img src="<%= @post.person.img_url %>" alt="<%= @post.person.name %> image" />
-    </figure>
-  <% end %>
+  <figure class="image is-64x64 mx-2 is-flex is-align-items-center">
+    <%= image_tag @post.person.img_url, alt: "#{@post.person.name} image" %>
+  </figure>
   <h3><%= link_to @post.person.name, @post.person %> (@<%= @post.user.name%>)</h3>
 </div>
 

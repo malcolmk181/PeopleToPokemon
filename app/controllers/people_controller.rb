@@ -29,7 +29,7 @@ class PeopleController < ApplicationController
     if !(Pixabay.new.photos(q: @person.name, safesearch: true, page: 1, per_page: 20)["hits"].first).nil?
       @person.img_url= Pixabay.new.photos(q: @person.name, safesearch: true, page: 1, per_page: 20)["hits"].first["webformatURL"]
     else
-      @person.img_url='icon.svg'
+      @person.img_url= "icon.svg"
     end
 
     respond_to do |format|
