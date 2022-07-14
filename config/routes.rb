@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "/posts/:id/comments/new", to: "comments#new"
   get "/posts/:id/comments/:comment_id/edit", to: "comments#edit"
 
-  get "/", to: "posts#index"
+  get "/", to: "welcome#index"
 
   get '/login', to: 'sessions#new', as: 'login'
   post '/login', to: 'sessions#create'

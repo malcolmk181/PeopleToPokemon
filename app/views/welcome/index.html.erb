@@ -1,0 +1,89 @@
+<div class="is-flex is-flex-direction-column is-align-items-center">
+    <h1 class="title">Welcome to PeopleToPokémon!</h1>
+    <h2 class="subtitle">The people to Pokémon matching platform</h2>
+</div>
+
+<div class="columns mt-3">
+    <div class="column is-one-quarter">
+        <a href="<%= people_path %>">
+            <div class="box is-flex is-flex-direction-column is-align-items-center has-text-centered">
+                <h3 class="title">People</h3>
+                <article class="image is-128x128">
+                    <img src="https://cdn.pixabay.com/photo/2016/12/27/06/38/albert-einstein-1933340_960_720.jpg" alt="People image" />
+                </article>
+                <p class="subtitle">View all the people in the database</p>
+            </div>
+        </a>
+    </div>
+    <div class="column is-one-quarter">
+        <a href="<%= pokemons_path %>">
+            <div class="box is-flex is-flex-direction-column is-align-items-center has-text-centered">
+                <h3 class="title">Pokémon</h3>
+                <article class="image is-128x128">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png" alt="Pokémon image" />
+                </article>
+                <p class="subtitle">View all the Pokémon in the database</p>
+            </div>
+        </a>
+    </div>
+    <div class="column is-one-quarter">
+        <a href="<%= posts_path %>">
+            <div class="box is-flex is-flex-direction-column is-align-items-center has-text-centered">
+                <h3 class="title">Posts</h3>
+                <div class="is-flex is-flex-direction-row is-align-content-flex-start" style="height: 128px;">
+                    <article class="image is-64x64">
+                        <img src="https://cdn.pixabay.com/photo/2016/12/27/06/38/albert-einstein-1933340_960_720.jpg" alt="Post image" />
+                    </article>
+                    <div class="is-align-self-center">
+                        <strong>&</strong>
+                    </div>
+                    <article class="image is-64x64 is-align-self-flex-end">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png" alt="Pokémon image" />
+                    </article>
+                    
+                </div>
+                <p class="subtitle">View People-to-Pokémon matches</p>
+            </div>
+        </a>
+    </div>
+    <div class="column is-one-quarter">
+        <a href="<%= login_path %>">
+            <div class="box is-flex is-flex-direction-column is-align-items-center has-text-centered">
+                <h3 class="title">Log in or Sign up</h3>
+                <article class="image is-128x128">
+                    <%= image_tag "icon.svg", alt: "User image" %>
+                </article>
+                <p class="subtitle">Log in or sign up to create posts and comments</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="box p-0 m-6 has-background-grey-light" style="height:5px;"></div>
+
+<nav class="level mt-5">
+    <div class="level-item has-text-centered">
+        <div>
+        <p class="heading">People</p>
+        <p class="title"><%= Person.all.count %></p>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+        <p class="heading">Posts</p>
+        <p class="title"><%= Post.all.count %></p>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+        <p class="heading">Comments</p>
+        <p class="title"><%= Comment.all.count %></p>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+        <p class="heading">Users</p>
+        <p class="title"><%= User.all.count %></p>
+        </div>
+    </div>
+</nav>
