@@ -6,65 +6,61 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-# Person.delete_all
-# Pokemon.delete_all
-# Comment.delete_all
-# Post.delete_all
 
+# Pokemon.delete_all # don't delete unless you want to reseed all the pokemon (unnecessary)
+Person.delete_all
+Comment.delete_all
+Post.delete_all
 
-# x = 1
-# 100.times do
-#     new_poke = Pokemon.new(name: PokeApi.get(pokemon: x).name)
-#     new_poke.define_values
-#     if new_poke.valid?
-#         new_poke.save
-#     end
-#     x+=1
-# end
+# Seed the first 100 pokemon
+if Pokemon.all.count < 100
+  (1..100).each do |i|
+    p = Pokemon.new(name: PokeApi.get(pokemon: i).name)
+    p.define_values
+    if p.valid? then p.save end
+  end
+end
 
-# User.create(name: 'Malcolm') (make in site so that we can have passwords)
-# User.create(name: 'Luke')
+# Create a few users
+users = ["luke","matthew","joan-purdy","jared","sungwoo","bogdan","chris"]
+users.each do |user|
+  u = User.new(name: user)
+  u.password = "password"
+  u.password_confirmation = "password"
+  if u.valid? then u.save end
+end
 
+# create some people
+people = ["Barack Obama", "Donald Trump", "Julian Casablancas", "Ice T", "Kanye West", "Nikolai Fraiture", "Albert Hammond Jr.", "Fabrizio Moretti","Nick Valensi", "Christ Erlendson", "John Doe"]
 
-luke = User.find_by(name: 'Luke')
-ash = User.find_by(name: 'Ash')
-misty = User.find_by(name: 'Misty')
-brock = User.find_by(name: 'Brock')
+Pixabay.configure {|config| config.key = "28500566-e5988cf43e390d3c5949dac21"}
+client = Pixabay.new
+people.each do |person|
+    p = Person.new(name: person)
+    result = client.photos(q: p.name, safesearch: true, page: 1, per_page: 20)["hits"].first
+    if !result.nil?
+        p.img_url= result["webformatURL"]
+    else
+        p.img_url= "icon.svg"
+    end
+    p.save
+end
 
-# Person.create(name: 'Barack Obama')
-# Person.create(name: 'Donald Trump')
-# Person.create(name: 'Julian Casablancas')
-# Person.create(name: 'Kanye West')
-# Person.create(name: 'Nikolai Fraiture')
-# Person.create(name: 'Albert Hammond Jr.')
-# Person.create(name: 'Fabrizio Moretti')
-# Person.create(name: 'Nick Valensi')
-# Person.create(name: 'Chris Erlendson')
-# Person.create(name: 'Bernie Sanders')
+# post & comment examples
+post_content_examples = ["These two are a perfect match", "Amazed I'm the first person to post this one here", "Check this out. No way anyone can disagree with this.", "This match came to me in a dream.", "There is an uncanny resemblance in their <insert body part here>", "You might have to think about this one for it to make sense."]
+positive_comments = ["lmao", "So true bestie", "as good as it gets. I love this website", "This comparison is almost as good as this site's CSS", "Alright, I'll give it to you. Solid comparison.", "Such a dumb pokemon and an even dumber person", "sick", "You haven't missed yet", "goddamn", "unironically hilarious", "[quirky comment]", "hahaha", "hmm... very perceptive", "lol", ":)", "preach", "This is it. This is the one.", "no capppp"]
+negative_comments = ["don't know about this one", "go back to the drawing board chief", "oh my god. shut UP", "We all miss sometimes, no need to feel bad about yourself", "log off", "touch grass, for your own sake", "I would curse out whoever posted this but I know this site has no moderation and I don't want the developers to have to implement it", "Bait", "not a good look"]
 
-
-# one = Post.create(person: Person.find_by(name: 'Donald Trump'), pokemon: Pokemon.find_by(name: 'growlithe'), user: User.find_by(name: 'Malcolm'), content: "He's orange lol. Popular politics is just aesthetics anyway, right. No point in trying to be deep.")
-# Comment.create(post_id: one.id, user_id: ash.id, vote: true, content: "Orange man bad.")
-# Comment.create(post_id: one.id, user_id: luke.id, vote: false, content: "See this is the problem with the American left. We replaced ideology with vibes and organizing with tweeting. We're the frog in the pot and don't even realize the water has been boiling since Reagan.")
-# Comment.create(post_id: one.id, user_id: brock.id, vote: true, content: "Haha. Came here to post this, glad someone already has.")
-# Comment.create(post_id: one.id, user_id: misty.id, vote: true, content: 'solid post.')
-
-# create a ton of people
-#  associate them randomly with pokemon in posts
-# create a certain number of positive comments, choose between a bunch of positive messages, same with negative
-
-post_content_examples = ["These two are a perfect match", "Amazed I'm the first person to post this one here", "Check this out. No way anyone can disagree with this."]
-positive_comments = ["lmao", "So true bestie", "as good as it gets. I love this website", "This comparison is almost as good as this site's CSS", "Alright, I'll give it to you. Solid comparison.", "Such a dumb pokemon and an even dumber person", "sick", "You haven't missed yet", "goddamn", "unironically hilarious", "[quirky comment]", "hahaha", "hmm... very perceptive", "lol", ":)", "preach"]
-negative_comments = ["don't know about this one", "go back to the drawing board chief", "oh my god. shut UP", "We all miss sometimes, no need to feel bad about yourself", "log off", "delete your account", "touch grass, for your own sake", "this sucks", "I would curse out whoever posted this but I know this site has no moderation and I don't want the developers to have to implement it", "Bait"]
-
-25.times do
+# create posts
+50.times do
     Post.create(person: Person.all.sample, user: User.all.sample, pokemon: Pokemon.all.sample, content: post_content_examples.sample)
 end
 
-vote_arr = [true, true, false, false, false]
+vote_arr = [true, true, true, false, false]
 
-40.times do
+# create comments (biased towards positive comments)
+100.times do
     v = vote_arr.sample
-    v ? c = positive_comments.sample : c= negative_comments.sample
+    v ? c = positive_comments.sample : c = negative_comments.sample
     Comment.create(post: Post.all.sample, user: User.all.sample, vote: v, content: c)
 end
